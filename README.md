@@ -1,4 +1,4 @@
-# cf-signify-java-example
+# Signify-Java Example
 
 ## Overview
 This project demonstrates how to use the [cf-signify-java](https://github.com/cardano-foundation/cf-signify-java) library, which is designed for "signing at the edge" within the KERI (Key Event Receipt Infrastructure) ecosystem. It provides examples of key generation, event signing, and identity management.
@@ -38,6 +38,36 @@ dependencies {
     implementation 'org.cardanofoundation:signify-java:1.0-abfbc0a-SNAPSHOT' 
     // Note: 'abfbc0a' should be replaced with the commit hash of your local build
 }
+```
+
+## Start KERIA Dependencies
+The application depends on a local instance of KERIA, vLEI-Server and Witness Demo. These are specified in the Docker Compose file. To start the dependencies:
+
+```bash
+docker compose up --wait
+```
+
+If successful, it should print something like this:
+```bash
+$ docker compose up --wait
+[+] Running 4/4
+ ✔ Network signify-ts_default           Created                                           0.0s
+ ✔ Container signify-ts-vlei-server-1   Healthy                                           5.7s
+ ✔ Container signify-ts-keria-1         Healthy                                           6.2s
+ ✔ Container signify-ts-witness-demo-1  Healthy                                           6.2s
+```
+
+You can customize the KERIA image using environment variables:
+```bash
+# To use a specific version
+export KERIA_IMAGE_TAG=0.1.3
+docker compose pull
+docker compose up --wait
+
+# To use another repository
+export KERIA_IMAGE=gleif/keria
+docker compose pull
+docker compose up --wait
 ```
 
 ## Building and Running
