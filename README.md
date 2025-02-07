@@ -78,20 +78,35 @@ curl -X POST "http://localhost:8080/api/example/identifiers/alice" \
 curl -X GET "http://localhost:8080/api/example/identifiers/alice"
 ```
 
-### Sign a Message
+### Get List of Identifiers
 ```bash
-curl -X POST "http://localhost:8080/api/example/identifiers/alice/sign" \
-     -H "Content-Type: application/json" \
-     -d "Hello, World!"
+curl -X GET "http://localhost:8080/api/example/identifiers"
 ```
 
-### Verify a Signature
+### Interact with an Identifier
 ```bash
-curl -X POST "http://localhost:8080/api/example/identifiers/alice/verify" \
+curl -X PUT "http://localhost:8080/api/example/identifiers/interact" \
      -H "Content-Type: application/json" \
      -d '{
-           "message": "Hello, World!",
-           "signature": "<signature_from_sign_endpoint>"
+           "name": "alice",
+           "pre": "<identifier_prefix>"
+         }'
+```
+
+### Rotate an Identifier's Keys
+```bash
+curl -X PUT "http://localhost:8080/api/example/identifiers/alice/rotate"
+```
+
+### Update an Identifier
+```bash
+curl -X PUT "http://localhost:8080/api/example/identifiers/alice/update" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "toad": 1,
+           "wits": ["<witness_prefix>"],
+           "adds": [],
+           "cuts": []
          }'
 ```
 
